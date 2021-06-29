@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Example App</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Cart)}"/>
+
+    <h2>Корзина</h2>
+
+    <span th:unless="${@cart.lines.size() > 0}">Your cart is empty now</span>
+    <table class="table table-striped" th:if="${@cart.lines.size() > 0}">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Count</td>
+            <td>Price</td>
+            <td>Operation</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="l : ${@cart.getLines()}">
+            <td th:text="${l.goods.name}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{'/cart/decrement/' + ${l.goods.id}}">-</a>
+                <span th:text="'  ' + ${l.count} + '  '"/>
+                <a class="btn btn-primary" th:href="@{'/cart/add/' + ${l.goods.id}}">+</a>
+            </td>
+            <td th:text="${l.price}"></td>
+            <td><a class="btn btn-danger" th:href="@{'/cart/remove/' + ${l.goods.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" th:href="@{'/orders/create'}" th:if="${@cart.lines.size() > 0}">Checkout</a>
+</div>
+</body>
+</html>

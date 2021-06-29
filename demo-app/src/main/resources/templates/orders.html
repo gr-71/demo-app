@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Example App</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Cart)}"/>
+
+    <h2>Order confirmation</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Count</td>
+            <td>Price</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="l : ${@cart.getLines()}">
+            <td th:text="${l.goods.name}"></td>
+            <td><span th:text="'  ' + ${l.count} + '  '"/></td>
+            <td th:text="${l.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form th:action="@{'/orders/confirm'}" method="post">
+        <div class="form-group">
+            <label>Client name</label>
+            <input th:value="${client.getName()}" class="form-control form-control-sm" name="name">
+        </div>
+        <div class="form-group">
+            <label>Address</label>
+            <input class="form-control form-control-sm" name="address">
+        </div>
+        <button type="submit" class="btn btn-primary">Confirm</button>
+    </form>
+</div>
+</body>
+</html>

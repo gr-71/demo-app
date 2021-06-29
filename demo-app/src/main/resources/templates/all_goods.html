@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Example Appt</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Market)}"/>
+
+    <h2>Example App</h2>
+
+    <h4>Goods list:</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Operation</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="g : ${goods.getContent()}">
+            <td th:text="${g.id}"></td>
+            <td th:text="${g.name}"></td>
+            <td th:text="${g.price}"></td>
+            <td><a class="btn btn-primary" th:href="@{'/cart/add/' + ${g.id}}">Add to cart</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

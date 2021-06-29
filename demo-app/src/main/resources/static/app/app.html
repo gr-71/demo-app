@@ -1,0 +1,21 @@
+<div>
+    <h1>Goods:</h1>
+
+    <h3>Goods list</h3>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Name</td>
+            <td>Price</td>
+            <td></td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="g in GoodsList">
+            <td>{g.name}}</td>
+            <td>{{g.price}}</td>
+            <td>
+                <button class="btn btn-primary to-cart-btn" ng-click="addToCartFunction(p)">Add to cart</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

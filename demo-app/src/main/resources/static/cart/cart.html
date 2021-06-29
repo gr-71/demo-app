@@ -1,0 +1,18 @@
+<div>
+    <h1>Cart</h1>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Count</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="orderLineDto in CartList">
+            <td>{{orderLineDto.goodsName}}</td>
+            <td>{{orderLineDto.price}}</td>
+            <td>{{orderLineDto.count}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" ng-click="createOrder()">Confirm order</button>
+</div>
